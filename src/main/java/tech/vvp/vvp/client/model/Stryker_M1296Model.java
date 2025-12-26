@@ -1,0 +1,12 @@
+package tech.vvp.vvp.client.model;
+
+import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
+import tech.vvp.vvp.entity.vehicle.Stryker_M1296Entity;
+
+public class Stryker_M1296Model extends VehicleModel<Stryker_M1296Entity> {
+
+    @Override
+    public boolean hideForTurretControllerWhileZooming() {
+        return true;
+    }
+}

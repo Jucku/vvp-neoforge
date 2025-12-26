@@ -1,0 +1,45 @@
+modLoader="javafml" #mandatory
+loaderVersion="${loader_version_range}" #mandatory
+license="${mod_license}"
+
+[[mods]] #mandatory
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="Vintage Vehicle Pack" #mandatory
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+logoFile= "vvp_logo.png" #optional
+#credits="" #optional
+authors="${mod_authors}" #optional
+description='''${mod_description}''' #mandatory
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[dependencies."${mod_id}"]]
+modId="neoforge"
+type="required"
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "superbwarfare"
+type = "required"
+versionRange = "[0.8.8,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.6.0,)"
+ordering = "NONE"
+side = "BOTH"
