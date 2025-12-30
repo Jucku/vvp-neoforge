@@ -3,13 +3,12 @@
   "category": "land",
   "inputs": [
     "superbwarfare:medium_battery_pack",
-    "superbwarfare:light_armament_module",
     "superbwarfare:heavy_armament_module",
-    "6 #superbwarfare:storage_blocks/steel",
+    "3 #forge:storage_blocks/steel",
     "8 superbwarfare:wheel",
     "superbwarfare:large_motor"
   ],
   "result": {
-    "entity": "vvp:centauro"
+    "entity": "vvp:pantsir_s1"
   }
 }
