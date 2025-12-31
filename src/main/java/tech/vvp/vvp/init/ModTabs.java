@@ -11,8 +11,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import tech.vvp.vvp.VVP;
-import tech.vvp.vvp.init.ModItems;
-import tech.vvp.vvp.init.ModEntities;
 
 @SuppressWarnings("unused")
 public class ModTabs {
