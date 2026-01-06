@@ -32,6 +32,7 @@ public record PantsirRadarSyncMessage(
         double[] allTargetY,
         double[] allTargetZ,
         int[] allTargetTypes, // Тип каждой цели
+        boolean[] allTargetIsAlly, // Союзник ли цель
 
         // Выпущенные ракеты для отображения на радаре
         double[] missileX,
@@ -81,6 +82,7 @@ public record PantsirRadarSyncMessage(
                     double[] allTargetY = new double[count];
                     double[] allTargetZ = new double[count];
                     int[] allTargetTypes = new int[count];
+                    boolean[] allTargetIsAlly = new boolean[count];
 
                     for (int i = 0; i < count; i++) {
                         allTargetIds[i] = buffer.readInt();
@@ -88,6 +90,7 @@ public record PantsirRadarSyncMessage(
                         allTargetY[i] = buffer.readDouble();
                         allTargetZ[i] = buffer.readDouble();
                         allTargetTypes[i] = buffer.readInt();
+                        allTargetIsAlly[i] = buffer.readBoolean();
                     }
 
                     int missileCount = buffer.readInt();
@@ -105,7 +108,8 @@ public record PantsirRadarSyncMessage(
                             vehicleId, radarState, targetEntityId, targetX, targetY, targetZ,
                             targetVelX, targetVelY, targetVelZ,
                             lockProgress, targetDistance, radarAngle, turretAngle,
-                            allTargetIds, allTargetX, allTargetY, allTargetZ, allTargetTypes,
+                            allTargetIds, allTargetX, allTargetY, allTargetZ,
+                            allTargetTypes, allTargetIsAlly,
                             missileX, missileY, missileZ
                     );
                 }
@@ -134,6 +138,7 @@ public record PantsirRadarSyncMessage(
                         buffer.writeDouble(message.allTargetY()[i]);
                         buffer.writeDouble(message.allTargetZ()[i]);
                         buffer.writeInt(message.allTargetTypes()[i]);
+                        buffer.writeBoolean(message.allTargetIsAlly[i]);
                     }
 
                     // Ракеты
