@@ -61,6 +61,42 @@ public record PantsirRadarSyncMessage(
     public static final StreamCodec<FriendlyByteBuf, PantsirRadarSyncMessage> STREAM_CODEC =
             new StreamCodec<>() {
                 @Override
+                public void encode(FriendlyByteBuf buffer, PantsirRadarSyncMessage message) {
+                    buffer.writeInt(message.vehicleId());
+                    buffer.writeInt(message.radarState());
+                    buffer.writeInt(message.targetEntityId());
+                    buffer.writeDouble(message.targetX());
+                    buffer.writeDouble(message.targetY());
+                    buffer.writeDouble(message.targetZ());
+                    buffer.writeDouble(message.targetVelX());
+                    buffer.writeDouble(message.targetVelY());
+                    buffer.writeDouble(message.targetVelZ());
+                    buffer.writeInt(message.lockProgress());
+                    buffer.writeDouble(message.targetDistance());
+                    buffer.writeFloat(message.radarAngle());
+                    buffer.writeFloat(message.turretAngle());
+
+                    // Все цели
+                    buffer.writeInt(message.allTargetIds().length);
+                    for (int i = 0; i < message.allTargetIds().length; i++) {
+                        buffer.writeInt(message.allTargetIds()[i]);
+                        buffer.writeDouble(message.allTargetX()[i]);
+                        buffer.writeDouble(message.allTargetY()[i]);
+                        buffer.writeDouble(message.allTargetZ()[i]);
+                        buffer.writeInt(message.allTargetTypes()[i]);
+                        buffer.writeBoolean(message.allTargetIsAlly[i]);
+                    }
+
+                    // Ракеты
+                    buffer.writeInt(message.missileX().length);
+                    for (int i = 0; i < message.missileX().length; i++) {
+                        buffer.writeDouble(message.missileX()[i]);
+                        buffer.writeDouble(message.missileY()[i]);
+                        buffer.writeDouble(message.missileZ()[i]);
+                    }
+                }
+
+                @Override
                 public @NotNull PantsirRadarSyncMessage decode(FriendlyByteBuf buffer) {
                     int vehicleId = buffer.readInt();
                     int radarState = buffer.readInt();
@@ -112,42 +148,6 @@ public record PantsirRadarSyncMessage(
                             allTargetTypes, allTargetIsAlly,
                             missileX, missileY, missileZ
                     );
-                }
-
-                @Override
-                public void encode(FriendlyByteBuf buffer, PantsirRadarSyncMessage message) {
-                    buffer.writeInt(message.vehicleId());
-                    buffer.writeInt(message.radarState());
-                    buffer.writeInt(message.targetEntityId());
-                    buffer.writeDouble(message.targetX());
-                    buffer.writeDouble(message.targetY());
-                    buffer.writeDouble(message.targetZ());
-                    buffer.writeDouble(message.targetVelX());
-                    buffer.writeDouble(message.targetVelY());
-                    buffer.writeDouble(message.targetVelZ());
-                    buffer.writeInt(message.lockProgress());
-                    buffer.writeDouble(message.targetDistance());
-                    buffer.writeFloat(message.radarAngle());
-                    buffer.writeFloat(message.turretAngle());
-
-                    // Все цели
-                    buffer.writeInt(message.allTargetIds().length);
-                    for (int i = 0; i < message.allTargetIds().length; i++) {
-                        buffer.writeInt(message.allTargetIds()[i]);
-                        buffer.writeDouble(message.allTargetX()[i]);
-                        buffer.writeDouble(message.allTargetY()[i]);
-                        buffer.writeDouble(message.allTargetZ()[i]);
-                        buffer.writeInt(message.allTargetTypes()[i]);
-                        buffer.writeBoolean(message.allTargetIsAlly[i]);
-                    }
-
-                    // Ракеты
-                    buffer.writeInt(message.missileX().length);
-                    for (int i = 0; i < message.missileX().length; i++) {
-                        buffer.writeDouble(message.missileX()[i]);
-                        buffer.writeDouble(message.missileY()[i]);
-                        buffer.writeDouble(message.missileZ()[i]);
-                    }
                 }
             };
 
