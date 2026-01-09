@@ -37,7 +37,14 @@ public record PantsirRadarSyncMessage(
         // Выпущенные ракеты для отображения на радаре
         double[] missileX,
         double[] missileY,
-        double[] missileZ
+        double[] missileZ,
+
+        // Система потери сигнала для GUI
+        boolean signalLost,        // Флаг потери сигнала
+        double lostTargetX,        // Последняя известная позиция (если signalLost=true)
+        double lostTargetY,
+        double lostTargetZ
+
 ) implements CustomPacketPayload {
 
     // Состояния радара
@@ -94,6 +101,12 @@ public record PantsirRadarSyncMessage(
                         buffer.writeDouble(message.missileY()[i]);
                         buffer.writeDouble(message.missileZ()[i]);
                     }
+
+                    // Потеря сигнала
+                    buffer.writeBoolean(message.signalLost);
+                    buffer.writeDouble(message.lostTargetX);
+                    buffer.writeDouble(message.lostTargetY);
+                    buffer.writeDouble(message.lostTargetZ);
                 }
 
                 @Override
@@ -140,13 +153,20 @@ public record PantsirRadarSyncMessage(
                         missileZ[i] = buffer.readDouble();
                     }
 
+                    // Потеря сигнала
+                    boolean signalLost = buffer.readBoolean();
+                    double lostTargetX = buffer.readDouble();
+                    double lostTargetY = buffer.readDouble();
+                    double lostTargetZ = buffer.readDouble();
+
                     return new PantsirRadarSyncMessage(
                             vehicleId, radarState, targetEntityId, targetX, targetY, targetZ,
                             targetVelX, targetVelY, targetVelZ,
                             lockProgress, targetDistance, radarAngle, turretAngle,
                             allTargetIds, allTargetX, allTargetY, allTargetZ,
                             allTargetTypes, allTargetIsAlly,
-                            missileX, missileY, missileZ
+                            missileX, missileY, missileZ,
+                            signalLost, lostTargetX, lostTargetY, lostTargetZ
                     );
                 }
             };
