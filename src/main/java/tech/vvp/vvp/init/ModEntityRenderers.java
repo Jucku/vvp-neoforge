@@ -38,14 +38,22 @@ public class ModEntityRenderers {
         event.registerEntityRenderer(ModEntities.BMP_2M.get(), Bmp2MRenderer::new);
         event.registerEntityRenderer(ModEntities.URAL.get(), UralRenderer::new);
         event.registerEntityRenderer(ModEntities.VARTA.get(), VartaRenderer::new);
-        event.registerEntityRenderer(ModEntities.VARTA_PTRK.get(), VartaPTRKRenderer::new);
         event.registerEntityRenderer(ModEntities.PANTSIR_S1.get(), PantsirS1Renderer::new);
         event.registerEntityRenderer(ModEntities.KORNET.get(), KornetRenderer::new);
         event.registerEntityRenderer(ModEntities.AGS_30.get(), Ags30Renderer::new);
         event.registerEntityRenderer(ModEntities.COBRA.get(), CobraRenderer::new);
         event.registerEntityRenderer(ModEntities.CENTAURO.get(), CentauroRenderer::new);
         event.registerEntityRenderer(ModEntities.BMPT_3K.get(), BMPT3KRenderer::new);
+        event.registerEntityRenderer(ModEntities.AJAX.get(), AjaxRenderer::new);
+
+        event.registerEntityRenderer(ModEntities.VARTA_PTRK.get(), VartaPTRKRenderer::new);
+        event.registerEntityRenderer(ModEntities.BMP_2_BAKHCHA.get(), Bmp2BakhcaRenderer::new);
+
         event.registerEntityRenderer(ModEntities.PANTSIR_MISSILE.get(), PantsirMissileRenderer::new);
+
+        // Mi-8 and D-30
+        event.registerEntityRenderer(ModEntities.MI_8.get(), Mi8Renderer::new);
+        event.registerEntityRenderer(ModEntities.D30.get(), D30Renderer::new);
     }
 
     /**

@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "a": {
-      "tag": "c:ingots/iron"
+      "tag": "forge:ingots/iron"
     },
     "b": {
       "item": "minecraft:gunpowder"

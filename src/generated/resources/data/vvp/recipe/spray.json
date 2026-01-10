@@ -10,7 +10,7 @@
       "item": "minecraft:dispenser"
     },
     "c": {
-      "tag": "c:ingots/iron"
+      "tag": "forge:ingots/iron"
     }
   },
   "result": {

@@ -23,6 +23,7 @@ public class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ContainerBlockItem.createInstance(ModEntities.PUMA.get()));
                 output.accept(ContainerBlockItem.createInstance(ModEntities.BRADLEY.get()));
+                output.accept(ContainerBlockItem.createInstance(ModEntities.AJAX.get()));
                 output.accept(ContainerBlockItem.createInstance(ModEntities.BTR_4.get()));
                 output.accept(ContainerBlockItem.createInstance(ModEntities.CENTAURO.get()));
                 output.accept(ContainerBlockItem.createInstance(ModEntities.STRYKER.get()));
@@ -58,6 +59,7 @@ public class ModTabs {
                         output.accept(ContainerBlockItem.createInstance(ModEntities.GAZ_TIGR.get()));
                         output.accept(ContainerBlockItem.createInstance(ModEntities.MI_28.get()));
                         output.accept(ContainerBlockItem.createInstance(ModEntities.MI_24.get()));
+                        output.accept(ContainerBlockItem.createInstance(ModEntities.MI_8.get()));
                         output.accept(ContainerBlockItem.createInstance(ModEntities.PANTSIR_S1.get()));
 
                     })
@@ -90,12 +92,15 @@ public class ModTabs {
                         output.accept(ModItems.MI_28_CHEST.get());
                         output.accept(ModItems.AGS_30_ITEM.get());
                         output.accept(ModItems.KORNET_ITEM.get());
+                        output.accept(ModItems.D30_ITEM.get());
                         output.accept(ModItems.ITEM_40_MM.get());
                         output.accept(ModItems.ITEM_30MM.get());
                         output.accept(ModItems.ITEM_7_62MM.get());
                         output.accept(ModItems.ITEM_12_7MM.get());
                         output.accept(ModItems.ITEM_AP_SHELL.get());
                         output.accept(ModItems.ITEM_HE_SHELL.get());
+                        output.accept(ModItems.SHELL_122MM.get());
+                        output.accept(ModItems.SHELL_122MM_CASING.get());
 
                         // Оружие
                         output.accept(ModItems.AT4.get());

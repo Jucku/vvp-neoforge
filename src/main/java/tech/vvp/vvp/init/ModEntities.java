@@ -116,6 +116,15 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<PantsirMissileEntity>> PANTSIR_MISSILE = register("pantsir_missile",
             EntityType.Builder.<PantsirMissileEntity>of(PantsirMissileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(false).setTrackingRange(256).setUpdateInterval(1).noSave().fireImmune().sized(0.5f, 0.5f));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<AjaxEntity>> AJAX = register("ajax",
+            EntityType.Builder.of(AjaxEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3f));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Mi8Entity>> MI_8 = register("mi_8",
+            EntityType.Builder.of(Mi8Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<D30Entity>> D30 = register("d30",
+            EntityType.Builder.of(D30Entity::new, MobCategory.MISC).setTrackingRange(256).setUpdateInterval(1).fireImmune().sized(3f, 2f));
+
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
         return ENTITY_TYPES.register(name, () -> entityTypeBuilder.build(name));

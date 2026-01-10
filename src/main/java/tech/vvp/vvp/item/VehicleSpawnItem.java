@@ -31,9 +31,18 @@ public class VehicleSpawnItem extends Item {
             Entity entity = entityType.create(serverLevel.getLevel());
             if (entity != null) {
                 entity.setPos(context.getClickLocation().x, context.getClickLocation().y, context.getClickLocation().z);
+
+                net.minecraft.core.Direction direction = context.getHorizontalDirection();
+                float yaw = direction.toYRot();
+
+                entity.setYRot(yaw);
+                entity.setXRot(0);
+                entity.yRotO = yaw;
+                entity.xRotO = 0;
+
                 serverLevel.getLevel().addFreshEntity(entity);
 
-                if (!context.getPlayer().getAbilities().instabuild) {
+                if (context.getPlayer() != null && !context.getPlayer().getAbilities().instabuild) {
                     context.getItemInHand().shrink(1);
                 }
                 return InteractionResult.SUCCESS;
@@ -47,9 +56,4 @@ public class VehicleSpawnItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
-
-    @Override
-    public Component getName(ItemStack stack) {
-        return super.getName(stack);
-    }
-} 
+}

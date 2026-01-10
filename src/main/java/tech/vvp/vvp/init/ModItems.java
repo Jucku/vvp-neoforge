@@ -116,6 +116,20 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> AT4 = REGISTRY.register("at4",
             () -> new tech.vvp.vvp.item.gun.At4Item());
 
+
+    // Mi-8 and D-30
+    public static final DeferredHolder<Item, Item> MI_8 = REGISTRY.register("mi_8",
+            () -> new tech.vvp.vvp.item.VehicleSpawnItem(ModEntities.MI_8::get, new Item.Properties().stacksTo(1)));
+
+    public static final DeferredHolder<Item, Item> D30_ITEM = REGISTRY.register("d30_item",
+            () -> new tech.vvp.vvp.item.VehicleSpawnItem(ModEntities.D30::get, new Item.Properties().stacksTo(64)));
+
+    public static final DeferredHolder<Item, Item> SHELL_122MM = REGISTRY.register("shell_122mm",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredHolder<Item, Item> SHELL_122MM_CASING = REGISTRY.register("shell_122mm_casing",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
     public static void register(IEventBus eventBus) {
         REGISTRY.register(eventBus);
     }
