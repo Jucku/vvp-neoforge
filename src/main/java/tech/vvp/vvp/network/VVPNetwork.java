@@ -20,6 +20,7 @@ public class VVPNetwork {
     private static void register() {
 
         playToServer(PantsirLockRequestMessage.TYPE, PantsirLockRequestMessage.STREAM_CODEC, PantsirLockRequestMessage::handle);
+        playToServer(SeatSwapMessage.TYPE, SeatSwapMessage.STREAM_CODEC, SeatSwapMessage::handle);
 
         playToClient(PantsirRadarSyncMessage.TYPE, PantsirRadarSyncMessage.STREAM_CODEC, PantsirRadarSyncMessage::handle);
     }
