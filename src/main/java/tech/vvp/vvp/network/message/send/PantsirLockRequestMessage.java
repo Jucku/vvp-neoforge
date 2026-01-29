@@ -26,13 +26,13 @@ public record PantsirLockRequestMessage(int action) implements CustomPacketPaylo
     public static final StreamCodec<FriendlyByteBuf, PantsirLockRequestMessage> STREAM_CODEC =
             new StreamCodec<>() {
                 @Override
-                public @NotNull PantsirLockRequestMessage decode(FriendlyByteBuf buf) {
-                    return new PantsirLockRequestMessage(buf.readInt());
+                public void encode(FriendlyByteBuf buf, PantsirLockRequestMessage value) {
+                    buf.writeInt(value.action);
                 }
 
                 @Override
-                public void encode(FriendlyByteBuf buf, PantsirLockRequestMessage value) {
-                    buf.writeInt(value.action);
+                public @NotNull PantsirLockRequestMessage decode(FriendlyByteBuf buf) {
+                    return new PantsirLockRequestMessage(buf.readInt());
                 }
             };
 
@@ -42,7 +42,6 @@ public record PantsirLockRequestMessage(int action) implements CustomPacketPaylo
     }
 
     public static void handle(PantsirLockRequestMessage message, IPayloadContext ctx) {
-        // Run on main thread
         ctx.enqueueWork(() -> {
             ServerPlayer player;
             try {
