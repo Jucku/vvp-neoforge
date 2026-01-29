@@ -25,14 +25,14 @@ public record SeatSwapMessage(int targetSeatIndex) implements CustomPacketPayloa
     public static final StreamCodec<FriendlyByteBuf, SeatSwapMessage> STREAM_CODEC =
             new StreamCodec<>() {
                 @Override
-                public @NotNull SeatSwapMessage decode(FriendlyByteBuf buffer) {
-                    int seat = buffer.readInt();
-                    return new SeatSwapMessage(seat);
+                public void encode(FriendlyByteBuf buffer, SeatSwapMessage message) {
+                    buffer.writeInt(message.targetSeatIndex());
                 }
 
                 @Override
-                public void encode(FriendlyByteBuf buffer, SeatSwapMessage message) {
-                    buffer.writeInt(message.targetSeatIndex());
+                public @NotNull SeatSwapMessage decode(FriendlyByteBuf buffer) {
+                    int seat = buffer.readInt();
+                    return new SeatSwapMessage(seat);
                 }
             };
 
@@ -41,7 +41,6 @@ public record SeatSwapMessage(int targetSeatIndex) implements CustomPacketPayloa
         return TYPE;
     }
 
-    // Server-side handler (Client -> Server)
     public static void handle(SeatSwapMessage message, IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
             if (!(ctx.player() instanceof ServerPlayer player)) return;
