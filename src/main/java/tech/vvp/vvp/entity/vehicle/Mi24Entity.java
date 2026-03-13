@@ -54,10 +54,6 @@ public class Mi24Entity extends CamoVehicleBase {
                 .custom((source, damage) -> getSourceAngle(source, 0.4f) * damage);
     }
 
-    @Override
-    public void baseTick() {
-        super.baseTick();
-    }
 
     public float getPropellerRot() {
         try {
