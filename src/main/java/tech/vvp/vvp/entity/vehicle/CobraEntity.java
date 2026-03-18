@@ -1,22 +1,12 @@
 package tech.vvp.vvp.entity.vehicle;
 
+import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.entity.vehicle.damage.DamageModifier;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import tech.vvp.vvp.VVP;
-
 import java.lang.reflect.Field;
 
-public class CobraEntity extends CamoVehicleBase {
-
-    private static final ResourceLocation[] CAMO_TEXTURES = {
-        VVP.loc("textures/entity/ah1w.png"),
-        VVP.loc("textures/entity/ah1w_dark.png"),
-        VVP.loc("textures/entity/ah1w_shark.png")
-    };
-    
-    private static final String[] CAMO_NAMES = {"Standard", "Dark", "Shark"};
+public class CobraEntity extends GeoVehicleEntity {
 
     private static Field propellerRotField;
     private static Field propellerRotOField;
@@ -35,16 +25,6 @@ public class CobraEntity extends CamoVehicleBase {
 
     public CobraEntity(EntityType<CobraEntity> type, Level world) {
         super(type, world);
-    }
-
-    @Override
-    public ResourceLocation[] getCamoTextures() {
-        return CAMO_TEXTURES;
-    }
-    
-    @Override
-    public String[] getCamoNames() {
-        return CAMO_NAMES;
     }
 
     @Override

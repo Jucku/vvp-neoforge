@@ -17,6 +17,9 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Btr4Entity>> BTR_4 = register("btr_4",
             EntityType.Builder.of(Btr4Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Btr3Entity>> BTR_3 = register("btr_3",
+            EntityType.Builder.of(Btr3Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
+
     public static final DeferredHolder<EntityType<?>, EntityType<BradleyEntity>> BRADLEY = register("bradley",
             EntityType.Builder.of(BradleyEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
 
@@ -127,6 +130,12 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Nh90Entity>> NH_90 = register("nh_90",
             EntityType.Builder.of(Nh90Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<OplotEntity>> OPLOT = register("oplot",
+            EntityType.Builder.of(OplotEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<PautinaEntity>> PAUTINA = register("pautina",
+            EntityType.Builder.of(PautinaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
 
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
