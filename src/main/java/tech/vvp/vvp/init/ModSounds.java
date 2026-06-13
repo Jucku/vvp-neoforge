@@ -103,6 +103,12 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> T72_AUTORELOAD = register("t72_autoreload");
     public static final DeferredHolder<SoundEvent, SoundEvent> T64_RELOAD = register("t64_reload");
 
+    // ПКТ / пулемёт
+    public static final DeferredHolder<SoundEvent, SoundEvent> PKT_FIRE = register("pkt_fire");
+
+    // MK30-2/ABM (PUMA / AJAX 30 мм)
+    public static final DeferredHolder<SoundEvent, SoundEvent> MK30_2_ABM_FIRE = register("mk30_2_abm_fire");
+
     // Звуки переключения оружия
     public static final DeferredHolder<SoundEvent, SoundEvent> INTO_ATGM = register("into_atgm");
     public static final DeferredHolder<SoundEvent, SoundEvent> INTO_AUTOCANNON = register("into_autocannon");

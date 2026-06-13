@@ -1,6 +1,5 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -11,7 +10,7 @@ import tech.vvp.vvp.entity.vehicle.PantsirS1Entity;
 /**
  * Модель Pantsir-S1 с вращающимся радаром
  */
-public class PantsirS1Model extends VehicleModel<PantsirS1Entity> {
+public class PantsirS1Model extends VvpVehicleModel<PantsirS1Entity> {
 
     // Для автономного вращения радара на клиенте (для каждого панциря отдельно)
     private long lastUpdateTime = 0;

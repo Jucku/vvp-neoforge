@@ -1,6 +1,5 @@
 package tech.vvp.vvp.entity.vehicle;
 
-import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.entity.vehicle.damage.DamageModifier;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -9,7 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class GazTigrEntity extends GeoVehicleEntity {
+public class GazTigrEntity extends VvpVehicleBase {
 
     private static final EntityDataAccessor<Float> STEERING_ANGLE = SynchedEntityData.defineId(GazTigrEntity.class, EntityDataSerializers.FLOAT);
     

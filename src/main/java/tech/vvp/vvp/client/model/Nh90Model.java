@@ -1,13 +1,12 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import tech.vvp.vvp.VVP;
 import tech.vvp.vvp.entity.vehicle.Nh90Entity;
 
-public class Nh90Model extends VehicleModel<Nh90Entity> {
+public class Nh90Model extends VvpVehicleModel<Nh90Entity> {
 
     @Override
     public ResourceLocation getModelResource(Nh90Entity entity) {

@@ -1,6 +1,5 @@
 package tech.vvp.vvp.entity.vehicle;
 
-import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.init.ModSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -15,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ags30Entity extends GeoVehicleEntity {
+public class Ags30Entity extends VvpVehicleBase {
 
     public Ags30Entity(EntityType<Ags30Entity> type, Level world) {
         super(type, world);

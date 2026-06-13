@@ -1,12 +1,11 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import tech.vvp.vvp.entity.vehicle.CobraEntity;
 
-public class CobraModel extends VehicleModel<CobraEntity> {
+public class CobraModel extends VvpVehicleModel<CobraEntity> {
 
     @Override
     public @Nullable TransformContext<CobraEntity> collectTransform(String boneName) {

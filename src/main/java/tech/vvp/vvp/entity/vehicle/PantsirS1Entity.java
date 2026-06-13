@@ -1107,6 +1107,21 @@ public class PantsirS1Entity extends CamoVehicleBase {
     }
 
     /**
+     * SBW 0.8.9 can NPE in {@code AmmoConsumer.init} when item registries are unavailable
+     * (e.g. disconnect) while {@code ClientEventHandler#handleVehicleFire} still ticks.
+     */
+    private boolean safeCanShoot(LivingEntity living) {
+        if (living == null || !living.isAlive() || this.isRemoved()) {
+            return false;
+        }
+        try {
+            return super.canShoot(living);
+        } catch (RuntimeException ignored) {
+            return false;
+        }
+    }
+
+    /**
      * Блокирует стрельбу ракетами без захвата цели
      */
     @Override
@@ -1114,18 +1129,14 @@ public class PantsirS1Entity extends CamoVehicleBase {
         int seatIndex = getSeatIndex(living);
         int weaponIndex = getSelectedWeapon(seatIndex);
 
-        if (weaponIndex == 0) {
-            return super.canShoot(living);
-        }
-
         if (weaponIndex == 1) {
             if (this.level().isClientSide) {
-                return isTargetLocked() && super.canShoot(living);
+                return isTargetLocked() && safeCanShoot(living);
             }
-            return hasLockedTarget() && super.canShoot(living);
+            return hasLockedTarget() && safeCanShoot(living);
         }
 
-        return super.canShoot(living);
+        return safeCanShoot(living);
     }
 
     /**
@@ -1142,7 +1153,10 @@ public class PantsirS1Entity extends CamoVehicleBase {
     @Override
     public void vehicleShoot(@Nullable LivingEntity living, @Nullable UUID uuid, @Nullable Vec3 targetPos) {
         if (living == null) {
-            super.vehicleShoot(living, uuid, targetPos);
+            try {
+                super.vehicleShoot(living, uuid, targetPos);
+            } catch (RuntimeException ignored) {
+            }
             return;
         }
 
@@ -1150,7 +1164,10 @@ public class PantsirS1Entity extends CamoVehicleBase {
         int weaponIndex = getSelectedWeapon(seatIndex);
 
         if (weaponIndex == 0) {
-            super.vehicleShoot(living, uuid, targetPos);
+            try {
+                super.vehicleShoot(living, uuid, targetPos);
+            } catch (RuntimeException ignored) {
+            }
             return;
         }
 
@@ -1158,11 +1175,17 @@ public class PantsirS1Entity extends CamoVehicleBase {
             if (hasLockedTarget()) {
                 UUID targetUuid = lockedTarget.getUUID();
                 Vec3 targetPosition = lockedTarget.position().add(0, lockedTarget.getBbHeight() / 2, 0);
-                super.vehicleShoot(living, targetUuid, targetPosition);
+                try {
+                    super.vehicleShoot(living, targetUuid, targetPosition);
+                } catch (RuntimeException ignored) {
+                }
             }
             return;
         }
 
-        super.vehicleShoot(living, uuid, targetPos);
+        try {
+            super.vehicleShoot(living, uuid, targetPos);
+        } catch (RuntimeException ignored) {
+        }
     }
 }

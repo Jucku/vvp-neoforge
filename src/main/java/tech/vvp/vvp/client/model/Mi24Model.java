@@ -1,11 +1,10 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import tech.vvp.vvp.entity.vehicle.Mi24Entity;
 
-public class Mi24Model extends VehicleModel<Mi24Entity> {
+public class Mi24Model extends VvpVehicleModel<Mi24Entity> {
 
     @Override
     public boolean hideForTurretControllerWhileZooming() {

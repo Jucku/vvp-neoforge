@@ -8,135 +8,133 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import tech.vvp.vvp.VVP;
-import tech.vvp.vvp.entity.projectile.*;
+import tech.vvp.vvp.entity.projectile.PantsirMissileEntity;
 import tech.vvp.vvp.entity.vehicle.*;
+import tech.vvp.vvp.entity.vehicle.util.CompactEntityHitbox;
 
 public class ModEntities {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, VVP.MOD_ID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<Btr4Entity>> BTR_4 = register("btr_4",
-            EntityType.Builder.of(Btr4Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
+            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, VVP.MOD_ID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<Btr3Entity>> BTR_3 = register("btr_3",
-            EntityType.Builder.of(Btr3Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
+    /** SBW-style low hull hitbox (F3+B white box, lock-on center). */
+    private static final float IFV_W = 3.6f;
+    private static final float IFV_H = 2.15f;
+    private static final float TANK_W = 4.62f;
+    private static final float TANK_H = 2f;
+    private static final float HELI_W = 3.375f;
+    private static final float HELI_H = 2.5f;
+    private static final float TRUCK_W = 2.8f;
+    private static final float TRUCK_H = 2.5f;
 
-    public static final DeferredHolder<EntityType<?>, EntityType<BradleyEntity>> BRADLEY = register("bradley",
-            EntityType.Builder.of(BradleyEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
+    private static final float VIS_IFV = 3.5f;
+    private static final float VIS_BMP2 = 3f;
+    private static final float VIS_TANK = 4f;
+    private static final float VIS_MBT = 5f;
+    private static final float VIS_HELI = 4f;
+    private static final float VIS_TRUCK = 4.5f;
 
-    public static final DeferredHolder<EntityType<?>, EntityType<BrmEntity>> BRM = register("brm",
-            EntityType.Builder.of(BrmEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Bmp3Entity>> BMP_3 = register("bmp_3",
-            EntityType.Builder.of(Bmp3Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2Entity>> BMP_2 = register("bmp_2",
-            EntityType.Builder.of(Bmp2Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2BakhchaEntity>> BMP_2_BAKHCHA = register("bmp_2_bakhcha",
-            EntityType.Builder.of(Bmp2BakhchaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2MEntity>> BMP_2M = register("bmp_2m",
-            EntityType.Builder.of(Bmp2MEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<ChryzantemaEntity>> CHRYZANTEMA = register("chryzantema",
-            EntityType.Builder.of(ChryzantemaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<StrykerEntity>> STRYKER = register("stryker",
-            EntityType.Builder.of(StrykerEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Stryker_M1296Entity>> STRYKER_M1296 = register("stryker_m1296",
-            EntityType.Builder.of(Stryker_M1296Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<TerminatorEntity>> TERMINATOR = register("terminator",
-            EntityType.Builder.of(TerminatorEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<BMPT3KEntity>> BMPT_3K = register("bmpt_3k",
-            EntityType.Builder.of(BMPT3KEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<T90MEntity>> T90_M = register("t90_m",
-            EntityType.Builder.of(T90MEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<M1A2Entity>> M1A2 = register("m1a2",
-            EntityType.Builder.of(M1A2Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(5f, 5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<M1A2SepEntity>> M1A2_SEP = register("m1a2_sep",
-            EntityType.Builder.of(M1A2SepEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(5f, 5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<PumaEntity>> PUMA = register("puma",
-            EntityType.Builder.of(PumaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<FMTVEntity>> FMTV = register("fmtv",
-            EntityType.Builder.of(FMTVEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Mi28Entity>> MI_28 = register("mi_28",
-            EntityType.Builder.of(Mi28Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Mi24Entity>> MI_24 = register("mi_24",
-            EntityType.Builder.of(Mi24Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Leopard2A7VEntity>> LEOPARD_2A7V = register("leopard_2a7v",
-            EntityType.Builder.of(Leopard2A7VEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Leopard2A4Entity>> LEOPARD_2A4 = register("leopard_2a4",
-            EntityType.Builder.of(Leopard2A4Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Ah64Entity>> AH_64 = register("ah_64",
-            EntityType.Builder.of(Ah64Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<GazTigrEntity>> GAZ_TIGR = register("gaz_tigr",
-            EntityType.Builder.of(GazTigrEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3f, 2f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<ChallengerEntity>> CHALLENGER = register("challenger",
-            EntityType.Builder.of(ChallengerEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<T72B3MEntity>> T72_B3M = register("t72_b3m",
-            EntityType.Builder.of(T72B3MEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<UralEntity>> URAL = register("ural",
-            EntityType.Builder.of(UralEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<VartaEntity>> VARTA = register("varta",
-            EntityType.Builder.of(VartaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<VartaPTRKEntity>> VARTA_PTRK = register("varta_ptrk",
-            EntityType.Builder.of(VartaPTRKEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3f, 3.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<PantsirS1Entity>> PANTSIR_S1 = register("pantsir_s1",
-            EntityType.Builder.of(PantsirS1Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Ags30Entity>> AGS_30 = register("ags_30",
-            EntityType.Builder.of(Ags30Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(1f, 1.5f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<KornetEntity>> KORNET = register("kornet",
-            EntityType.Builder.of(KornetEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(1f, 2f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<CobraEntity>> COBRA = register("cobra",
-            EntityType.Builder.of(CobraEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<CentauroEntity>> CENTAURO = register("centauro",
-            EntityType.Builder.of(CentauroEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
+    public static final DeferredHolder<EntityType<?>, EntityType<Btr4Entity>> BTR_4 =
+            registerVehicle("btr_4", IFV_W, IFV_H, VIS_IFV, builder(Btr4Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Btr3Entity>> BTR_3 =
+            registerVehicle("btr_3", IFV_W, IFV_H, VIS_IFV, builder(Btr3Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<BradleyEntity>> BRADLEY =
+            registerVehicle("bradley", 3.6f, 2.3f, VIS_IFV, builder(BradleyEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<BrmEntity>> BRM =
+            registerVehicle("brm", IFV_W, IFV_H, VIS_IFV, builder(BrmEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bmp3Entity>> BMP_3 =
+            registerVehicle("bmp_3", IFV_W, IFV_H, VIS_IFV, builder(Bmp3Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2Entity>> BMP_2 =
+            registerVehicle("bmp_2", 3.6f, 2.1f, VIS_BMP2, builder(Bmp2Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2BakhchaEntity>> BMP_2_BAKHCHA =
+            registerVehicle("bmp_2_bakhcha", 3.6f, 2.1f, VIS_BMP2, builder(Bmp2BakhchaEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bmp2MEntity>> BMP_2M =
+            registerVehicle("bmp_2m", 3.6f, 2.1f, VIS_BMP2, builder(Bmp2MEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<ChryzantemaEntity>> CHRYZANTEMA =
+            registerVehicle("chryzantema", IFV_W, IFV_H, VIS_IFV, builder(ChryzantemaEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<StrykerEntity>> STRYKER =
+            registerVehicle("stryker", IFV_W, IFV_H, VIS_IFV, builder(StrykerEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Stryker_M1296Entity>> STRYKER_M1296 =
+            registerVehicle("stryker_m1296", IFV_W, IFV_H, VIS_IFV, builder(Stryker_M1296Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<TerminatorEntity>> TERMINATOR =
+            registerVehicle("terminator", IFV_W, IFV_H, VIS_IFV, builder(TerminatorEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<BMPT3KEntity>> BMPT_3K =
+            registerVehicle("bmpt_3k", IFV_W, IFV_H, VIS_IFV, builder(BMPT3KEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<T90MEntity>> T90_M =
+            registerVehicle("t90_m", TANK_W, TANK_H, VIS_TANK, builder(T90MEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<M1A2Entity>> M1A2 =
+            registerVehicle("m1a2", TANK_W, TANK_H, VIS_MBT, builder(M1A2Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<M1A2SepEntity>> M1A2_SEP =
+            registerVehicle("m1a2_sep", TANK_W, TANK_H, VIS_MBT, builder(M1A2SepEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<PumaEntity>> PUMA =
+            registerVehicle("puma", IFV_W, 2.3f, VIS_IFV, builder(PumaEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<FMTVEntity>> FMTV =
+            registerVehicle("fmtv", TRUCK_W, TRUCK_H, VIS_TRUCK, builder(FMTVEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Mi28Entity>> MI_28 =
+            registerVehicle("mi_28", HELI_W, 3.375f, VIS_HELI, builder(Mi28Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Mi24Entity>> MI_24 =
+            registerVehicle("mi_24", HELI_W, HELI_H, VIS_HELI, builder(Mi24Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Leopard2A7VEntity>> LEOPARD_2A7V =
+            registerVehicle("leopard_2a7v", TANK_W, TANK_H, VIS_TANK, builder(Leopard2A7VEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Leopard2A4Entity>> LEOPARD_2A4 =
+            registerVehicle("leopard_2a4", TANK_W, TANK_H, VIS_TANK, builder(Leopard2A4Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Ah64Entity>> AH_64 =
+            registerVehicle("ah_64", HELI_W, HELI_H, VIS_HELI, builder(Ah64Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<GazTigrEntity>> GAZ_TIGR =
+            registerVehicle("gaz_tigr", 2.4f, 2f, 2f, builder(GazTigrEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<ChallengerEntity>> CHALLENGER =
+            registerVehicle("challenger", TANK_W, TANK_H, VIS_TANK, builder(ChallengerEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<T72B3MEntity>> T72_B3M =
+            registerVehicle("t72_b3m", TANK_W, TANK_H, VIS_TANK, builder(T72B3MEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<UralEntity>> URAL =
+            registerVehicle("ural", TRUCK_W, 3f, VIS_TRUCK, builder(UralEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<VartaEntity>> VARTA =
+            registerVehicle("varta", 3f, 2.3f, VIS_IFV, builder(VartaEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<VartaPTRKEntity>> VARTA_PTRK =
+            registerVehicle("varta_ptrk", 3f, 2.3f, VIS_IFV, builder(VartaPTRKEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<PantsirS1Entity>> PANTSIR_S1 =
+            registerVehicle("pantsir_s1", 3.5f, 2.5f, VIS_HELI, builder(PantsirS1Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Ags30Entity>> AGS_30 =
+            registerVehicle("ags_30", 0.8f, 1.2f, 1.5f, builder(Ags30Entity::new).setTrackingRange(256));
+    public static final DeferredHolder<EntityType<?>, EntityType<KornetEntity>> KORNET =
+            registerVehicle("kornet", 0.6f, 1.35f, 2f, builder(KornetEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<CobraEntity>> COBRA =
+            registerVehicle("cobra", HELI_W, HELI_H, VIS_HELI, builder(CobraEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<CentauroEntity>> CENTAURO =
+            registerVehicle("centauro", TANK_W, 2.2f, VIS_TANK, builder(CentauroEntity::new));
     public static final DeferredHolder<EntityType<?>, EntityType<PantsirMissileEntity>> PANTSIR_MISSILE = register("pantsir_missile",
-            EntityType.Builder.<PantsirMissileEntity>of(PantsirMissileEntity::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(false).setTrackingRange(256).setUpdateInterval(1).noSave().fireImmune().sized(0.5f, 0.5f));
+            EntityType.Builder.<PantsirMissileEntity>of(PantsirMissileEntity::new, MobCategory.MISC)
+                    .setShouldReceiveVelocityUpdates(false).setTrackingRange(256).setUpdateInterval(1).noSave()
+                    .fireImmune().sized(0.5f, 0.5f));
+    public static final DeferredHolder<EntityType<?>, EntityType<AjaxEntity>> AJAX =
+            registerVehicle("ajax", IFV_W, 2f, VIS_BMP2, builder(AjaxEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<Mi8Entity>> MI_8 =
+            registerVehicle("mi_8", HELI_W, HELI_H, VIS_HELI, builder(Mi8Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<D30Entity>> D30 =
+            registerVehicle("d30", 2.5f, 1.6f, 2f, builder(D30Entity::new).setTrackingRange(256));
+    public static final DeferredHolder<EntityType<?>, EntityType<Nh90Entity>> NH_90 =
+            registerVehicle("nh_90", HELI_W, HELI_H, VIS_HELI, builder(Nh90Entity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<OplotEntity>> OPLOT =
+            registerVehicle("oplot", TANK_W, TANK_H, VIS_TANK, builder(OplotEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<PautinaEntity>> PAUTINA =
+            registerVehicle("pautina", IFV_W, IFV_H, VIS_HELI, builder(PautinaEntity::new));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<AjaxEntity>> AJAX = register("ajax",
-            EntityType.Builder.of(AjaxEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(3.9f, 3f));
+    private static <T extends Entity> EntityType.Builder<T> builder(EntityType.EntityFactory<T> factory) {
+        return EntityType.Builder.of(factory, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune();
+    }
 
-    public static final DeferredHolder<EntityType<?>, EntityType<Mi8Entity>> MI_8 = register("mi_8",
-            EntityType.Builder.of(Mi8Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<D30Entity>> D30 = register("d30",
-            EntityType.Builder.of(D30Entity::new, MobCategory.MISC).setTrackingRange(256).setUpdateInterval(1).fireImmune().sized(3f, 2f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Nh90Entity>> NH_90 = register("nh_90",
-            EntityType.Builder.of(Nh90Entity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<OplotEntity>> OPLOT = register("oplot",
-            EntityType.Builder.of(OplotEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<PautinaEntity>> PAUTINA = register("pautina",
-            EntityType.Builder.of(PautinaEntity::new, MobCategory.MISC).setTrackingRange(512).setUpdateInterval(1).fireImmune().sized(4f, 4f));
-
+    private static <T extends Entity> DeferredHolder <EntityType<?>,EntityType<T>> registerVehicle(
+            String name,
+            float collisionWidth,
+            float collisionHeight,
+            float visualHeight,
+            EntityType.Builder<T> entityTypeBuilder) {
+        return ENTITY_TYPES.register(name, () -> {
+            EntityType<T> type = entityTypeBuilder.sized(collisionWidth, collisionHeight).build(name);
+            CompactEntityHitbox.registerVisualHeight(type, visualHeight);
+            return type;
+        });
+    }
 
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.Builder<T> entityTypeBuilder) {
         return ENTITY_TYPES.register(name, () -> entityTypeBuilder.build(name));

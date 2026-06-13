@@ -1,13 +1,12 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import tech.vvp.vvp.VVP;
 import tech.vvp.vvp.entity.vehicle.Mi8Entity;
 
-public class Mi8Model extends VehicleModel<Mi8Entity> {
+public class Mi8Model extends VvpVehicleModel<Mi8Entity> {
 
     @Override
     public ResourceLocation getModelResource(Mi8Entity entity) {
@@ -43,20 +42,6 @@ public class Mi8Model extends VehicleModel<Mi8Entity> {
                     (bone, vehicle, state) -> bone.setRotY(-Mth.lerp(state.getPartialTick(), vehicle.getPropellerRotO(), vehicle.getPropellerRot()));
             case "vint2" ->
                     (bone, vehicle, state) -> bone.setRotX(6 * Mth.lerp(state.getPartialTick(), vehicle.getPropellerRotO(), vehicle.getPropellerRot()));
-            case "door" ->
-                    (bone, vehicle, state) -> {
-                        // Left door: [0,0,0] -> [2, 0, 22]
-                        float progress = vehicle.getLeftDoorProgress(state.getPartialTick());
-                        bone.setPosX(2f * progress);
-                        bone.setPosZ(22f * progress);
-                    };
-            case "door2" ->
-                    (bone, vehicle, state) -> {
-                        // Right door: mirror [-2, 0, 22]
-                        float progress = vehicle.getRightDoorProgress(state.getPartialTick());
-                        bone.setPosX(-2f * progress);
-                        bone.setPosZ(22f * progress);
-                    };
             default -> super.collectTransform(boneName);
         };
     }

@@ -5,8 +5,8 @@
   "refmap": "vvp.refmap.json",
   "mixins": [],
   "client": [
-    "VehicleCrosshairOverlayMixin",
-    "LandVehicleHudMixin"
+    "VehicleOrientedSeatMixin",
+    "VehicleGunDataSafetyMixin"
   ],
   "minVersion": "0.8",
   "injectors": {

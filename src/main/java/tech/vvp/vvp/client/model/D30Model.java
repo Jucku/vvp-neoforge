@@ -1,19 +1,16 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.animation.AnimationState;
 import tech.vvp.vvp.VVP;
 import tech.vvp.vvp.entity.vehicle.D30Entity;
 
-public class D30Model extends VehicleModel<D30Entity> {
+public class D30Model extends VvpVehicleModel<D30Entity> {
 
-    // Накопленное вращение вентилей
+    private int lastRenderedEntityId = Integer.MIN_VALUE;
     private float vertelYawRotation = 0f;
     private float vertelPitchRotation = 0f;
-
-    // Предыдущие значения для расчёта дельты
     private float prevTurretYaw = 0f;
     private float prevTurretPitch = 0f;
 
@@ -36,12 +33,17 @@ public class D30Model extends VehicleModel<D30Entity> {
     public void setCustomAnimations(D30Entity vehicle, long instanceId, AnimationState<D30Entity> animationState) {
         super.setCustomAnimations(vehicle, instanceId, animationState);
 
-        // Обновляем вращение вентилей после базовых анимаций
-        float partialTick = animationState.getPartialTick();
+        int entityId = vehicle.getId();
+        if (entityId != lastRenderedEntityId) {
+            lastRenderedEntityId = entityId;
+            vertelYawRotation = 0f;
+            vertelPitchRotation = 0f;
+            prevTurretYaw = vehicle.getTurretYRot();
+            prevTurretPitch = vehicle.getTurretXRot();
+        }
 
-        // Текущие углы башни
-        float currentYaw = Mth.lerp(partialTick, vehicle.turretYRotO, vehicle.getTurretYRot());
-        float currentPitch = Mth.lerp(partialTick, vehicle.turretXRotO, vehicle.getTurretXRot());
+        float currentYaw = vehicle.getTurretYRot();
+        float currentPitch = vehicle.getTurretXRot();
 
         // Дельта для yaw
         float deltaYaw = currentYaw - prevTurretYaw;

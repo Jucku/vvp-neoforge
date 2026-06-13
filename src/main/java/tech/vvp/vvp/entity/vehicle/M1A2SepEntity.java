@@ -1,14 +1,32 @@
 package tech.vvp.vvp.entity.vehicle;
 
-import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.entity.vehicle.damage.DamageModifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import tech.vvp.vvp.VVP;
 
-public class M1A2SepEntity extends GeoVehicleEntity {
+public class M1A2SepEntity extends CamoVehicleBase {
+
+    private static final ResourceLocation[] CAMO_TEXTURES = {
+            VVP.loc("textures/entity/m1a2.png"),
+            VVP.loc("textures/entity/m1a2_sand.png")
+    };
+
+    private static final String[] CAMO_NAMES = {"Camo", "Iraq"};
 
     public M1A2SepEntity(EntityType<M1A2SepEntity> type, Level world) {
         super(type, world);
+    }
+
+    @Override
+    public ResourceLocation[] getCamoTextures() {
+        return CAMO_TEXTURES;
+    }
+
+    @Override
+    public String[] getCamoNames() {
+        return CAMO_NAMES;
     }
 
     @Override

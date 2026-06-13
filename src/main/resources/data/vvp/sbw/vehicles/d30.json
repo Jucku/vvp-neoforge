@@ -2,13 +2,31 @@
   "ID": "vvp:d30",
   "MaxHealth": 200,
   "MaxEnergy": 0,
-  "TurretPos": [0, 1.35, 0.33],
-  "TurretTurnSpeed": [4, 3],
-  "TurretPitchRange": [-7, 70],
-  "BarrelPos": [0.23, 0.0, 0.0],
+  "TurretPos": [
+    0,
+    1.35,
+    0.33
+  ],
+  "TurretTurnSpeed": [
+    4,
+    3
+  ],
+  "TurretPitchRange": [
+    -7,
+    70
+  ],
+  "BarrelPos": [
+    0.23,
+    0.0,
+    0.0
+  ],
   "Seats": {
     "Transform": "Vehicle",
-    "Position": [0, 0.4, -0.6],
+    "Position": [
+      0,
+      0.4,
+      -0.6
+    ],
     "BanHand": true,
     "MinYaw": -180,
     "MaxYaw": 180,
@@ -17,14 +35,28 @@
     "CameraPos": {
       "Transform": "Barrel",
       "UseFixedCameraPos": true,
-      "Position": [-0.2, 0.2, -0.8],
+      "Position": [
+        -0.2,
+        0.2,
+        -0.8
+      ],
       "Direction": "Barrel"
     },
-    "Weapons": ["Main"],
-    "Sensitivity": [0.3, 0.5, 1],
+    "Weapons": [
+      "Main"
+    ],
+    "Sensitivity": [
+      0.3,
+      0.5,
+      1
+    ],
     "DismountInfo": {
       "Transform": "Vehicle",
-      "Position": [1.5, 0, 0]
+      "Position": [
+        1.5,
+        0,
+        0
+      ]
     }
   },
   "Weapons": {
@@ -41,7 +73,7 @@
       "Velocity": 15,
       "Damage": 400,
       "ExplosionDamage": 350,
-      "ExplosionRadius": 14,
+      "ExplosionRadius": 7.7,
       "HeatPerShoot": 100,
       "NaturalCooldown": 3,
       "RecoilTime": 0,
@@ -61,12 +93,24 @@
       "SoundRadius": 128,
       "ShootPos": {
         "Transform": "Barrel",
-        "Positions": [[0, 0, 2.5]],
-        "Directions": ["Barrel"]
+        "Positions": [
+          [
+            0,
+            0,
+            2.5
+          ]
+        ],
+        "Directions": [
+          "Barrel"
+        ]
       }
     }
   },
-  "ThirdPersonCameraPos": [0, 2.0, -3.5],
+  "ThirdPersonCameraPos": [
+    0,
+    2.0,
+    -3.5
+  ],
   "Mass": 3.2,
   "DamageModifiers": [
     "minecraft:lava * 2",

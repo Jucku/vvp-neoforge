@@ -1,15 +1,25 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
+import tech.vvp.vvp.client.model.util.CannonRecoilTransforms;
 import tech.vvp.vvp.entity.vehicle.BMPT3KEntity;
 
-public class BMPT3KModel extends VehicleModel<BMPT3KEntity> {
+public class BMPT3KModel extends VvpVehicleModel<BMPT3KEntity> {
 
     @Override
     public boolean hideForTurretControllerWhileZooming() {
         return true;
+    }
+
+    @Override
+    public @Nullable TransformContext<BMPT3KEntity> collectTransform(String boneName) {
+        TransformContext<BMPT3KEntity> recoil = CannonRecoilTransforms.matchBarrel(boneName);
+        if (recoil != null) {
+            return recoil;
+        }
+        return super.collectTransform(boneName);
     }
 
 
@@ -107,10 +117,5 @@ public class BMPT3KModel extends VehicleModel<BMPT3KEntity> {
     @Override
     public float getBoneMoveZ(float t) {
         return getKeyframeValue(t, 2) - START_Z;
-    }
-
-    @Override
-    public int getDefaultWrapRange(VehicleEntity vehicle) {
-        return TRACK_COUNT * 2;
     }
 }

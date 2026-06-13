@@ -1,6 +1,6 @@
 package tech.vvp.vvp.client.overlay;
 
-import com.atsuishio.superbwarfare.item.FiringParameters;
+import com.atsuishio.superbwarfare.item.misc.FiringParametersItem;
 import com.atsuishio.superbwarfare.tools.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
@@ -22,7 +22,6 @@ import tech.vvp.vvp.entity.vehicle.D30Entity;
 
 import static com.atsuishio.superbwarfare.entity.vehicle.utils.VehicleVecUtils.getXRotFromVector;
 import static tech.vvp.vvp.entity.vehicle.D30Entity.*;
-import static com.atsuishio.superbwarfare.tools.RangeTool.calculateLaunchVector;
 
 @OnlyIn(Dist.CLIENT)
 public class D30InfoOverlay implements LayeredDraw.Layer {
@@ -40,8 +39,7 @@ public class D30InfoOverlay implements LayeredDraw.Layer {
         Player player = mc.player;
         if (player == null) return;
 
-        Entity lookingEntity = TraceTool.findLookingEntity(
-                player, player.getAttribute(Attributes.ENTITY_INTERACTION_RANGE).getValue());
+        Entity lookingEntity = TraceTool.findLookingEntity(player, 30.0f);
 
         if (!(lookingEntity instanceof D30Entity d30)) return;
 
@@ -83,20 +81,42 @@ public class D30InfoOverlay implements LayeredDraw.Layer {
 
         // ─── Right side: firing parameters (if holding item) ───
         ItemStack stack = player.getOffhandItem();
-        if (player.getMainHandItem().getItem() instanceof FiringParameters) {
+        if (player.getMainHandItem().getItem() instanceof FiringParametersItem) {
             stack = player.getMainHandItem();
         }
 
-        if (stack.getItem() instanceof FiringParameters) {
+        if (stack.getItem() instanceof FiringParametersItem) {
             double targetX = NBTTool.getTag(stack).getDouble("TargetX");
             double targetY = NBTTool.getTag(stack).getDouble("TargetY") - 1;
             double targetZ = NBTTool.getTag(stack).getDouble("TargetZ");
             boolean isDepressed = NBTTool.getTag(stack).getBoolean("IsDepressed");
 
             Vec3 targetPos = new Vec3(targetX, targetY, targetZ);
-            Vec3 launchVector = calculateLaunchVector(
-                    d30.getShootPos(), targetPos,
-                    PROJECTILE_VELOCITY, GRAVITY, isDepressed);
+            // Calculate launch angle using ballistic trajectory
+            double dx = targetPos.x - d30.getShootPos().x;
+            double dy = targetPos.y - d30.getShootPos().y;
+            double dz = targetPos.z - d30.getShootPos().z;
+            double horizontalDist = Math.sqrt(dx * dx + dz * dz);
+
+            // Ballistic calculation for launch angle
+            double v = PROJECTILE_VELOCITY;
+            double g = GRAVITY;
+            double discriminant = v*v*v*v - g*(g*horizontalDist*horizontalDist + 2*dy*v*v);
+
+            Vec3 launchVector = null;
+            if (discriminant >= 0) {
+                double angle1 = Math.atan((v*v + Math.sqrt(discriminant)) / (g*horizontalDist));
+                double angle2 = Math.atan((v*v - Math.sqrt(discriminant)) / (g*horizontalDist));
+                double angle = isDepressed ? Math.min(angle1, angle2) : Math.max(angle1, angle2);
+
+                double horizontalVel = v * Math.cos(angle);
+                double verticalVel = v * Math.sin(angle);
+                launchVector = new Vec3(
+                        (dx / horizontalDist) * horizontalVel,
+                        verticalVel,
+                        (dz / horizontalDist) * horizontalVel
+                );
+            }
 
             Vec3 vec3 = EntityAnchorArgument.Anchor.EYES.apply(d30);
             double d0 = (targetPos.x - vec3.x) * 0.2;

@@ -1,7 +1,6 @@
 package tech.vvp.vvp.entity.vehicle;
 
 import com.atsuishio.superbwarfare.entity.projectile.CannonShellEntity;
-import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.init.ModEntities;
 import com.atsuishio.superbwarfare.init.ModSounds;
 import com.atsuishio.superbwarfare.init.ModTags;
@@ -41,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class D30Entity extends GeoVehicleEntity {
+public class D30Entity extends VvpVehicleBase {
 
     public static final EntityDataAccessor<Float> TARGET_PITCH = SynchedEntityData.defineId(D30Entity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> TARGET_YAW = SynchedEntityData.defineId(D30Entity.class, EntityDataSerializers.FLOAT);
@@ -140,7 +139,8 @@ public class D30Entity extends GeoVehicleEntity {
         if (stack.isEmpty()) {
             // Вентиль yaw (влево-вправо)
             if (lookingObb == yawController) {
-                interactEvent(OBB.vector3dToVec3(yawController.center()));
+                Vec3 centerPos = new Vec3(yawController.center.x, yawController.center.y, yawController.center.z);
+                interactEvent(centerPos);
                 float delta = (player.isShiftKeyDown() ? -0.04f : 0.04f) * (float) interactionTick;
                 entityData.set(TARGET_YAW, Mth.clamp(entityData.get(TARGET_YAW) + delta, -180f, 180f));
                 player.swing(InteractionHand.MAIN_HAND);
@@ -149,7 +149,8 @@ public class D30Entity extends GeoVehicleEntity {
 
             // Вентиль pitch (вверх-вниз)
             if (lookingObb == pitchController) {
-                interactEvent(OBB.vector3dToVec3(pitchController.center()));
+                Vec3 centerPos = new Vec3(pitchController.center.x, pitchController.center.y, pitchController.center.z);
+                interactEvent(centerPos);
                 float delta = (player.isShiftKeyDown() ? 0.04f : -0.04f) * (float) interactionTick;
                 entityData.set(TARGET_PITCH, Mth.clamp(entityData.get(TARGET_PITCH) + delta, -70f, 7f));
                 player.swing(InteractionHand.MAIN_HAND);
@@ -228,7 +229,7 @@ public class D30Entity extends GeoVehicleEntity {
         shell.setOwner(player);
         shell.setDamage(400);
         shell.setExplosionDamage(350);
-        shell.setExplosionRadius(14);
+        shell.setExplosionRadius(8);
         shell.setType(CannonShellEntity.Type.HE);
 
         shell.shoot(barrelDir.x, barrelDir.y, barrelDir.z, PROJECTILE_VELOCITY, 0.5f);
@@ -358,16 +359,16 @@ public class D30Entity extends GeoVehicleEntity {
         Matrix4d turretTransform = getTurretTransform(1);
 
         Vector4d yawPos = transformPosition(turretTransform, 0.6, -0.29, -0.9);
-        this.yawController.center().set(new Vector3f((float) yawPos.x, (float) yawPos.y, (float) yawPos.z));
+        this.yawController.center.set(yawPos.x, yawPos.y, yawPos.z);
         this.yawController.rotation().set(VectorTool.combineRotationsTurret(1, this));
 
         Vector4d pitchPos = transformPosition(turretTransform, 0.84, -0.02, -0.66);
-        this.pitchController.center().set(new Vector3f((float) pitchPos.x, (float) pitchPos.y, (float) pitchPos.z));
+        this.pitchController.center.set(pitchPos.x, pitchPos.y, pitchPos.z);
         this.pitchController.rotation().set(VectorTool.combineRotationsTurret(1, this));
 
         Matrix4d vehicleTransform = getVehicleTransform(1);
         Vector4d bodyPos = transformPosition(vehicleTransform, 0, 0.2, 0);
-        this.body.center().set(new Vector3f((float) bodyPos.x, (float) bodyPos.y, (float) bodyPos.z));
+        this.body.center.set(bodyPos.x, bodyPos.y, bodyPos.z);
         this.body.rotation().set(VectorTool.combineRotations(1, this));
     }
 

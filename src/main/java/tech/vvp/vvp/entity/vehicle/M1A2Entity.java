@@ -9,11 +9,12 @@ import tech.vvp.vvp.VVP;
 public class M1A2Entity extends CamoVehicleBase {
 
     private static final ResourceLocation[] CAMO_TEXTURES = {
-        VVP.loc("textures/entity/m1a2_camo.png"),
-        VVP.loc("textures/entity/m1a2_iraq.png")
+            VVP.loc("textures/entity/m1a2.png"),
+            VVP.loc("textures/entity/m1a2_sand.png"),
+            VVP.loc("textures/entity/m1a2_iraq.png")
     };
-    
-    private static final String[] CAMO_NAMES = {"Camo", "Iraq"};
+
+    private static final String[] CAMO_NAMES = {"Default", "Sand", "Iraq"};
 
     public M1A2Entity(EntityType<M1A2Entity> type, Level world) {
         super(type, world);
@@ -33,5 +34,10 @@ public class M1A2Entity extends CamoVehicleBase {
     public DamageModifier getDamageModifier() {
         return super.getDamageModifier()
                 .custom((source, damage) -> getSourceAngle(source, 0.4f) * damage);
+    }
+
+    @Override
+    public int getTrackAnimationLength() {
+        return 80;
     }
 }

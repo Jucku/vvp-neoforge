@@ -1,6 +1,5 @@
 package tech.vvp.vvp.entity.vehicle;
 
-import com.atsuishio.superbwarfare.entity.vehicle.base.GeoVehicleEntity;
 import com.atsuishio.superbwarfare.init.ModDamageTypes;
 import com.atsuishio.superbwarfare.init.ModItems;
 import com.atsuishio.superbwarfare.init.ModSounds;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class KornetEntity extends GeoVehicleEntity {
+public class KornetEntity extends VvpVehicleBase {
 
     // 是否已装填弹药
     public static final EntityDataAccessor<Boolean> LOADED = SynchedEntityData.defineId(KornetEntity.class, EntityDataSerializers.BOOLEAN);

@@ -1,11 +1,10 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
 import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
 import net.minecraft.util.Mth;
 import tech.vvp.vvp.entity.vehicle.Bmp2BakhchaEntity;
 
-public class Bmp2BakhcaModel extends VehicleModel<Bmp2BakhchaEntity> {
+public class Bmp2BakhcaModel extends VvpVehicleModel<Bmp2BakhchaEntity> {
 
     @Override
     public boolean hideForTurretControllerWhileZooming() {
@@ -116,10 +115,5 @@ public class Bmp2BakhcaModel extends VehicleModel<Bmp2BakhchaEntity> {
     @Override
     public float getBoneMoveZ(float t) {
         return getKeyframeValue(t, 2) - START_Z;
-    }
-
-    @Override
-    public int getDefaultWrapRange(VehicleEntity vehicle) {
-        return TRACK_COUNT * 2;
     }
 }

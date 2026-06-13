@@ -2,6 +2,7 @@
   "entity.vvp.mi_24": "Ми-24",
   "entity.vvp.cobra": "AH-1Z Кобра",
   "entity.vvp.mi_28": "Ми-28Н",
+  "entity.vvp.mi_8": "Ми-8МТВ",
 
   "entity.vvp.btr_80a": "БТР-80А",
   "entity.vvp.stryker": "Stryker M1128",
@@ -13,6 +14,7 @@
   "entity.vvp.bradley": "M3A3 Bradley",
   "entity.vvp.humvee": "Humvee M2",
   "entity.vvp.m1a2_sep": "M1A2 SEP V2",
+  "entity.vvp.m1a2": "M1A2 Abrams",
   "entity.vvp.oplot": "Т-80 Оплот",
   "entity.vvp.t72_b3m": "Т-72Б3М",
   "entity.vvp.t90_m": "Т-90М",
@@ -28,6 +30,7 @@
   "entity.vvp.toyota": "Toyota",
   "entity.vvp.leopard_2a7v": "Leopard 2A7V",
   "entity.vvp.leopard_2a4": "Leopard 2A4",
+  "entity.vvp.challenger": "Challenger 2",
   "entity.vvp.ah_64": "AH-64 Apache",
   "entity.vvp.ural": "Урал",
   "entity.vvp.centauro": "Centauro",
@@ -74,7 +77,6 @@
   "tooltip.vvp.usage_restriction": "Использование этих моделей вне аддона запрещено",
 
   "key.categories.vvp": "VVP",
-  "key.vvp.thermal_vision": "Тепловизор",
   "key.vvp.pantsir_lock": "Захват цели (Панцирь)",
   "key.vvp.toggle_radar": "Включить/выключить радар",
   "key.vvp.move_radar_pos": "Переместить радар (позиция)",
@@ -109,6 +111,8 @@
   "item.vvp.item_40_mm": "Ящик боеприпасов 40 мм",
   "item.vvp.item_30mm": "Малокалиберные снаряды",
 
+  "weapon.vvp.m197_20mm": "M197 20 мм %s",
+
   "entity.vvp.kornet": "ПТРК Корнет",
   "item.vvp.kornet_item": "Установка ПТРК Корнет",
 
@@ -117,5 +121,10 @@
 
   "item.vvp.d30_item": "Гаубица Д-30",
   "item.vvp.shell_122mm": "122мм ОФ снаряд",
-  "item.vvp.shell_122mm_casing": "Пустая гильза 122мм"
+  "item.vvp.shell_122mm_casing": "Пустая гильза 122мм",
+
+  "item.vvp.spray": "Камуфляжный спрей",
+  "des.vvp.spray": "Меняет камуфляж подходящей техники.",
+  "des.vvp.spray.usage": "ПКМ по машине — переключить камуфляж.",
+  "message.vvp.camo_changed": "Камуфляж: %s"
 }

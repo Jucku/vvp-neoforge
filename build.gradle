@@ -2,7 +2,9 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'idea'
-    id 'net.neoforged.moddev' version '2.0.140'
+    id 'net.neoforged.moddev' version '2.0.141'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '2.1.20'
 }
 
 version = mod_version
@@ -25,10 +27,12 @@ repositories {
         }
     }
     maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
     }
 }
 
@@ -123,12 +127,16 @@ configurations {
 }
 
 dependencies {
-    implementation "curse.maven:superb-warfare-1218165:7292699"
+    implementation "maven.modrinth:superb-warfare:Qdwf6rIX"
+    runtimeOnly "thedarkcolour:kotlinforforge-neoforge:5.11.0"
 
-    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.8.2"
+    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.8.4"
 
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
     compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
+
+    runtimeOnly "maven.modrinth:jei:YAcQ6elZ"
+    compileOnly "maven.modrinth:jei:YAcQ6elZ"
 
 
     // Example mod dependency with JEI

@@ -3,7 +3,7 @@
   "category": "misc",
   "inputs": [
     "superbwarfare:medium_armament_module",
-    "4 #forge:storage_blocks/steel",
+    "4 #superbwarfare:storage_blocks/steel",
     "2 superbwarfare:wheel"
   ],
   "result": {

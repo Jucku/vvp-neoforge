@@ -5,8 +5,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import tech.vvp.vvp.VVP;
-import tech.vvp.vvp.client.renderer.entity.projectile.*;
 import tech.vvp.vvp.client.renderer.entity.vehicle.*;
+import com.atsuishio.superbwarfare.client.renderer.projectile.BasicProjectileRenderer;
 
 @SuppressWarnings("removal")
 @EventBusSubscriber(modid = VVP.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -52,7 +52,7 @@ public class ModEntityRenderers {
         event.registerEntityRenderer(ModEntities.VARTA_PTRK.get(), VartaPTRKRenderer::new);
         event.registerEntityRenderer(ModEntities.BMP_2_BAKHCHA.get(), Bmp2BakhcaRenderer::new);
 
-        event.registerEntityRenderer(ModEntities.PANTSIR_MISSILE.get(), PantsirMissileRenderer::new);
+        event.registerEntityRenderer(ModEntities.PANTSIR_MISSILE.get(), BasicProjectileRenderer::new);
 
         // Mi-8 and D-30
         event.registerEntityRenderer(ModEntities.MI_8.get(), Mi8Renderer::new);
@@ -60,15 +60,5 @@ public class ModEntityRenderers {
 
         // NH-90
         event.registerEntityRenderer(ModEntities.NH_90.get(), Nh90Renderer::new);
-    }
-
-    /**
-     * Регистрация всех рендереров сущностей
-     * @deprecated Используйте метод registerEntityRenderers с аннотацией @SubscribeEvent
-     */
-    @Deprecated
-    public static void register() {
-        // Эта функция больше не используется
-        // Все регистрации перенесены в метод registerEntityRenderers
     }
 }

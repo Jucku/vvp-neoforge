@@ -11,13 +11,18 @@ import java.lang.reflect.Field;
 public class Mi24Entity extends CamoVehicleBase {
 
     private static final ResourceLocation[] CAMO_TEXTURES = {
-        VVP.loc("textures/entity/mi_24_camo.png"),
-        VVP.loc("textures/entity/mi24.png"),
-        VVP.loc("textures/entity/mi24rf.png"),
-        VVP.loc("textures/entity/mi24ukr.png")
+            VVP.loc("textures/entity/mi24_sand_ru.png"),
+            VVP.loc("textures/entity/mi24_green_ru.png"),
+            VVP.loc("textures/entity/mi24_green_rb.png"),
+            VVP.loc("textures/entity/mi24_sand.png"),
+            VVP.loc("textures/entity/mi24_snow.png"),
+            VVP.loc("textures/entity/mi24_tan.png"),
+            VVP.loc("textures/entity/mi24_tan_zov.png")
     };
-    
-    private static final String[] CAMO_NAMES = {"Camo", "Standard", "Russia", "Ukraine"};
+
+    private static final String[] CAMO_NAMES = {
+            "Sand RU", "Green RU", "Green RB", "Sand", "Snow", "Tan", "Tan ZOV"
+    };
 
     @Override
     public ResourceLocation[] getCamoTextures() {

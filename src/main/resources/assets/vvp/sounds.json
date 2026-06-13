@@ -369,5 +369,20 @@
     "sounds": [
       "vvp:ah1z_engine_idle"
     ]
+  },
+  "pkt_fire": {
+    "sounds": [
+      "vvp:pkt_fire"
+    ]
+  },
+  "mk30_2_abm_fire": {
+    "sounds": [
+      "vvp:mk30_2_abm_shot-001",
+      "vvp:mk30_2_abm_shot-002",
+      "vvp:mk30_2_abm_shot-003",
+      "vvp:mk30_2_abm_shot-004",
+      "vvp:mk30_2_abm_shot-005",
+      "vvp:mk30_2_abm_shot-006"
+    ]
   }
 }

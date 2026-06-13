@@ -2,6 +2,7 @@
   "entity.vvp.mi_24": "Mil Mi-24",
   "entity.vvp.cobra": "AH-1Z",
   "entity.vvp.mi_28": "Mi-28N",
+  "entity.vvp.mi_8": "Mi-8MTV",
 
   "entity.vvp.btr_80a": "BTR-80A",
   "entity.vvp.stryker": "Stryker M1128",
@@ -13,6 +14,7 @@
   "entity.vvp.bradley": "M3A3 Bradley",
   "entity.vvp.humvee": "Humvee M2",
   "entity.vvp.m1a2_sep": "M1A2 SEP V2",
+  "entity.vvp.m1a2": "M1A2 Abrams",
   "entity.vvp.oplot": "T-80 Oplot",
   "entity.vvp.t72_b3m": "T-72B3M",
   "entity.vvp.t90_m": "T-90M",
@@ -28,6 +30,7 @@
   "entity.vvp.toyota": "Toyota",
   "entity.vvp.leopard_2a7v": "Leopard 2A7V",
   "entity.vvp.leopard_2a4": "Leopard 2A4",
+  "entity.vvp.challenger": "Challenger 2",
   "entity.vvp.ah_64": "AH-64 Apache",
   "entity.vvp.ural": "Ural",
   "entity.vvp.centauro": "Centauro",
@@ -68,7 +71,6 @@
   "tooltip.vvp.model_author": "Model by VVP Team",
   "tooltip.vvp.usage_restriction": "Usage of these models outside of the addon is prohibited",
   "key.categories.vvp": "VVP",
-  "key.vvp.thermal_vision": "Thermal Vision",
   "key.vvp.pantsir_lock": "Lock Target (Pantsir)",
   "key.vvp.toggle_radar": "Toggle Radar",
   "key.vvp.move_radar_pos": "Move Radar (position)",
@@ -153,5 +155,10 @@
   "item.vvp.d30_item": "D-30 Howitzer",
   "item.vvp.shell_122mm": "122mm HE Shell",
   "item.vvp.shell_122mm_casing": "122mm Empty Casing",
-  "weapon.vvp.d30": "D-30 122mm %s"
+  "weapon.vvp.d30": "D-30 122mm %s",
+
+  "item.vvp.spray": "Camouflage Spray",
+  "des.vvp.spray": "Switches the camouflage pattern of compatible vehicles.",
+  "des.vvp.spray.usage": "Right-click a vehicle to cycle camo.",
+  "message.vvp.camo_changed": "Camouflage: %s"
 }

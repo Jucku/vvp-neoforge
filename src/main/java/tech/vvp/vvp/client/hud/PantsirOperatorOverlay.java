@@ -2,13 +2,14 @@ package tech.vvp.vvp.client.hud;
 
 import com.atsuishio.superbwarfare.init.ModKeyMappings;
 import com.atsuishio.superbwarfare.init.ModSounds;
-import com.atsuishio.superbwarfare.tools.VectorUtil;
+import com.atsuishio.superbwarfare.tools.VectorToolKt;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +24,6 @@ import org.lwjgl.glfw.GLFW;
 import tech.vvp.vvp.VVP;
 import tech.vvp.vvp.client.PantsirClientHandler;
 import tech.vvp.vvp.entity.vehicle.PantsirS1Entity;
-import tech.vvp.vvp.network.VVPNetwork;
 import tech.vvp.vvp.network.message.send.PantsirLockRequestMessage;
 import tech.vvp.vvp.network.message.recive.PantsirRadarSyncMessage;
 
@@ -627,74 +627,75 @@ public class PantsirOperatorOverlay {
 
     private static void renderTargetMarker(GuiGraphics guiGraphics, int screenWidth, int screenHeight, int vehicleId) {
         PantsirClientHandler.PantsirRadarData data = PantsirClientHandler.getRadarData(vehicleId);
-        if (data == null || data.radarState != PantsirRadarSyncMessage.STATE_LOCKED) return;
+        if (data == null) return;
+        if (data.radarState != PantsirRadarSyncMessage.STATE_LOCKING
+                && data.radarState != PantsirRadarSyncMessage.STATE_LOCKED) {
+            return;
+        }
 
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-        if (player == null) return;
+        if (player == null || mc.level == null) return;
 
         Entity vehicle = player.getVehicle();
-        if (!(vehicle instanceof PantsirS1Entity pantsir)) return;
+        if (!(vehicle instanceof PantsirS1Entity)) return;
 
         Vec3 targetPos;
         boolean isSignalLost = data.uiLostSignal;
 
-        // Если сигнал потерян - используем последнюю известную позицию
-        if (isSignalLost && data.uiLastTargetPos != null) {
+        Entity targetEntity = data.targetEntityId >= 0 ? mc.level.getEntity(data.targetEntityId) : null;
+        if (targetEntity != null && targetEntity.isAlive()) {
+            float partialTick = mc.getFrameTimeNs();
+            targetPos = new Vec3(
+                    Mth.lerp(partialTick, targetEntity.xOld, targetEntity.getX()),
+                    Mth.lerp(partialTick, targetEntity.yOld, targetEntity.getY()) + targetEntity.getBbHeight() * 0.5,
+                    Mth.lerp(partialTick, targetEntity.zOld, targetEntity.getZ())
+            );
+        } else if (isSignalLost && data.uiLastTargetPos != null) {
             targetPos = data.uiLastTargetPos;
         } else {
-            targetPos = new Vec3(
-                    data.targetX,
-                    data.targetY,
-                    data.targetZ
-            );
+            targetPos = new Vec3(data.targetX, data.targetY, data.targetZ);
         }
 
-        if (!VectorUtil.canSee(targetPos)) return;
+        if (targetPos.equals(Vec3.ZERO)) return;
 
-        Vec3 screenPos = VectorUtil.worldToScreen(targetPos);
+        Vec3 screenPos = VectorToolKt.worldToScreen(targetPos);
+        if (screenPos.z <= 0 || !VectorToolKt.canSee(targetPos)) return;
+
         int x = (int) screenPos.x;
         int y = (int) screenPos.y;
 
-        // Мигание при потере сигнала
-        int color = COLOR_LOCKED;
+        int color = data.radarState == PantsirRadarSyncMessage.STATE_LOCKING ? COLOR_TARGET_YELLOW : COLOR_LOCKED;
         if (isSignalLost) {
-            // Пульсация прозрачности
             long time = System.currentTimeMillis();
-            float alpha = (float)(Math.sin(time / 200.0) * 0.4 + 0.6); // 0.2 - 1.0
-            int alphaInt = (int)(alpha * 255);
+            float alpha = (float) (Math.sin(time / 200.0) * 0.4 + 0.6);
+            int alphaInt = (int) (alpha * 255);
             color = (COLOR_TARGET_RED & 0x00FFFFFF) | (alphaInt << 24);
 
-            // Или мигание (вкл/выкл)
-            if ((time / 300) % 2 == 0) {
-                drawTargetBrackets(guiGraphics, x, y, color);
-            }
-        } else {
-            drawTargetBrackets(guiGraphics, x, y, color);
+            if ((time / 300) % 2 != 0) return;
         }
 
-        // Дистанция
-        String distText = String.format("%.0fm", data.targetDistance);
-        guiGraphics.drawString(mc.font, Component.literal(distText), x + MARKER_HALF + 5, y - 12, color, false);
+        drawTargetBrackets(guiGraphics, x, y, color);
 
-        // Скорость цели (блоков/тик -> м/с, 1 тик = 0.05 сек, так что *20)
-        double speed = Math.sqrt(
-                data.targetVelX * data.targetVelX +
-                        data.targetVelY * data.targetVelY +
-                        data.targetVelZ * data.targetVelZ
-        ) * 20; // блоков/сек
-        String speedText = String.format("%.0f m/s", speed);
-        guiGraphics.drawString(mc.font, Component.literal(speedText), x + MARKER_HALF + 5, y, color, false);
+        if (data.radarState == PantsirRadarSyncMessage.STATE_LOCKED) {
+            String distText = String.format("%.0fm", data.targetDistance);
+            guiGraphics.drawString(mc.font, Component.literal(distText), x + MARKER_HALF + 5, y - 12, color, false);
 
-        // Время до перехвата ракетой (примерно)
-        double missileSpeed = 160.0; // м/с
-        double timeToIntercept = data.targetDistance / missileSpeed;
-        String timeText = String.format("ETA: %.1fs", timeToIntercept);
-        guiGraphics.drawString(mc.font, Component.literal(timeText), x + MARKER_HALF + 5, y + 12, color, false);
+            double speed = Math.sqrt(
+                    data.targetVelX * data.targetVelX +
+                            data.targetVelY * data.targetVelY +
+                            data.targetVelZ * data.targetVelZ
+            ) * 20;
+            guiGraphics.drawString(mc.font, Component.literal(String.format("%.0f m/s", speed)), x + MARKER_HALF + 5, y, color, false);
 
-        // Статус
-        String status = isSignalLost ? "LOST" : "TRK";
-        guiGraphics.drawString(mc.font, Component.literal(status), x + MARKER_HALF + 5, y + 24, color, false);
+            double timeToIntercept = data.targetDistance / 160.0;
+            guiGraphics.drawString(mc.font, Component.literal(String.format("ETA: %.1fs", timeToIntercept)), x + MARKER_HALF + 5, y + 12, color, false);
+
+            String status = isSignalLost ? "LOST" : "TRK";
+            guiGraphics.drawString(mc.font, Component.literal(status), x + MARKER_HALF + 5, y + 24, color, false);
+        } else {
+            guiGraphics.drawString(mc.font, Component.literal(data.lockProgress + "%"), x + MARKER_HALF + 5, y - 12, color, false);
+        }
     }
 
     private static void drawTargetBrackets(GuiGraphics guiGraphics, int cx, int cy, int color) {

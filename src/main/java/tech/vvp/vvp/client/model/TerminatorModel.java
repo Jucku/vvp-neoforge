@@ -1,17 +1,62 @@
 package tech.vvp.vvp.client.model;
 
-import com.atsuishio.superbwarfare.client.model.entity.VehicleModel;
-import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
+import tech.vvp.vvp.client.model.util.CannonRecoilTransforms;
+import tech.vvp.vvp.client.model.util.ModelBoneTransforms;
 import tech.vvp.vvp.entity.vehicle.TerminatorEntity;
 
-public class TerminatorModel extends VehicleModel<TerminatorEntity> {
+public class TerminatorModel extends VvpVehicleModel<TerminatorEntity> {
+
+    private static final String CANNON_WEAPON = "Cannon";
 
     @Override
     public boolean hideForTurretControllerWhileZooming() {
         return true;
     }
 
+    @Override
+    public @Nullable TransformContext<TerminatorEntity> collectTransform(String boneName) {
+        return switch (boneName) {
+            case "rocket" -> missileBone(4);
+            case "rocket3" -> missileBone(3);
+            case "rocket2" -> missileBone(2);
+            case "rocket4" -> missileBone(1);
+            case "dulo" -> barrelRecoil(0);
+            case "dulo2" -> barrelRecoil(1);
+            default -> super.collectTransform(boneName);
+        };
+    }
+
+    private TransformContext<TerminatorEntity> missileBone(int minAmmo) {
+        return (bone, vehicle, state) -> bone.setHidden(shouldHideMissile(vehicle, minAmmo));
+    }
+
+    private TransformContext<TerminatorEntity> barrelRecoil(int barrelIndex) {
+        return (bone, vehicle, state) -> {
+            ModelBoneTransforms.clearRecoilOffsets(bone);
+            if (vehicle.getCannonRecoilTime() <= 0) {
+                return;
+            }
+            if (!CANNON_WEAPON.equals(vehicle.getGunName(0))) {
+                return;
+            }
+            var gunData = vehicle.getGunData(CANNON_WEAPON);
+            if (gunData == null) {
+                return;
+            }
+            int firedBarrelIndex = Math.floorMod(gunData.fireIndex.get() - 1, 2);
+            if (firedBarrelIndex != barrelIndex) {
+                return;
+            }
+            CannonRecoilTransforms.apply(bone, vehicle, CannonRecoilTransforms.Profile.STANDARD);
+        };
+    }
+
+    private boolean shouldHideMissile(TerminatorEntity vehicle, int minAmmo) {
+        var gunData = vehicle.getGunData("Missile");
+        return gunData != null && gunData.ammo.get() < minAmmo;
+    }
 
     private static final int TRACK_COUNT = 53;
     private static final int MAX_IDX = 53;
@@ -107,10 +152,5 @@ public class TerminatorModel extends VehicleModel<TerminatorEntity> {
     @Override
     public float getBoneMoveZ(float t) {
         return getKeyframeValue(t, 2) - START_Z;
-    }
-
-    @Override
-    public int getDefaultWrapRange(VehicleEntity vehicle) {
-        return TRACK_COUNT * 2;
     }
 }
