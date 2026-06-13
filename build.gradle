@@ -27,6 +27,14 @@ repositories {
         }
     }
     maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+        content {
+            includeGroup "mezz.jei"
+            includeGroup "vazkii.patchouli"
+        }
+    }
+    maven {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
@@ -135,8 +143,8 @@ dependencies {
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
     compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
 
-    runtimeOnly "maven.modrinth:jei:YAcQ6elZ"
-    compileOnly "maven.modrinth:jei:YAcQ6elZ"
+    runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:19.27.0.340"
 
 
     // Example mod dependency with JEI
