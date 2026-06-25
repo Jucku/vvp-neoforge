@@ -52,6 +52,8 @@ public class ModEntities {
             registerVehicle("bmp_2m", 3.6f, 2.1f, VIS_BMP2, builder(Bmp2MEntity::new));
     public static final DeferredHolder<EntityType<?>, EntityType<ChryzantemaEntity>> CHRYZANTEMA =
             registerVehicle("chryzantema", IFV_W, IFV_H, VIS_IFV, builder(ChryzantemaEntity::new));
+    public static final DeferredHolder<EntityType<?>, EntityType<CV90Entity>> CV_90 =
+            registerVehicle("cv_90", IFV_W, IFV_H, VIS_IFV, builder(CV90Entity::new));
     public static final DeferredHolder<EntityType<?>, EntityType<StrykerEntity>> STRYKER =
             registerVehicle("stryker", IFV_W, IFV_H, VIS_IFV, builder(StrykerEntity::new));
     public static final DeferredHolder<EntityType<?>, EntityType<Stryker_M1296Entity>> STRYKER_M1296 =

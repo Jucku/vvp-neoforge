@@ -48,6 +48,7 @@ public class ModEntityRenderers {
         event.registerEntityRenderer(ModEntities.OPLOT.get(), OplotRenderer::new);
         event.registerEntityRenderer(ModEntities.BTR_3.get(), Btr3Renderer::new);
         event.registerEntityRenderer(ModEntities.PAUTINA.get(), PautinaRenderer::new);
+        event.registerEntityRenderer(ModEntities.CV_90.get(), CV90Renderer::new);
 
         event.registerEntityRenderer(ModEntities.VARTA_PTRK.get(), VartaPTRKRenderer::new);
         event.registerEntityRenderer(ModEntities.BMP_2_BAKHCHA.get(), Bmp2BakhcaRenderer::new);
