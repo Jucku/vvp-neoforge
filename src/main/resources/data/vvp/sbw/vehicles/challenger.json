@@ -117,7 +117,7 @@
         "Transform": "WeaponStationBarrel",
         "ZoomPosition": [
           0,
-          0.0,
+          0,
           1.2
         ],
         "Direction": "WeaponStationBarrel"
@@ -240,7 +240,7 @@
       "ExplosionDamage": 80,
       "ExplosionRadius": 2.2,
       "RecoilTime": 42,
-      "RecoilForce": 1.0,
+      "RecoilForce": 1,
       "ShootShake": [
         8,
         10,
@@ -284,8 +284,8 @@
         "Positions": [
           [
             0,
-            0,
-            4.0
+            -0.3499,
+            7.1402
           ]
         ],
         "Directions": [
@@ -314,9 +314,9 @@
         "Transform": "Barrel",
         "Positions": [
           [
-            0,
-            0.35,
-            -0.5
+            -0.3106,
+            -0.2167,
+            2.1906
           ]
         ],
         "Directions": [
@@ -413,7 +413,7 @@
     1.06474375
   ],
   "PassengerWeaponStationPos": [
-    1.0,
+    1,
     1.2,
     -0.2
   ],

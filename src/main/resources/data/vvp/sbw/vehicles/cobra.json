@@ -170,8 +170,8 @@
         ],
         "ZoomPosition": [
           0,
-          1.6,
-          7
+          0.9654,
+          4.8598
         ],
         "ZoomDirection": "Barrel"
       },
@@ -227,8 +227,8 @@
         "Positions": [
           [
             0,
-            0.102,
-            3.013
+            0.0122,
+            1.6658
           ]
         ],
         "Directions": [
@@ -397,7 +397,7 @@
   ],
   "UpStep": 1.1,
   "RotateOffsetHeight": 1.5,
-  "Mass": 1.0,
+  "Mass": 1,
   "AllowFreeCam": true,
   "HasDecoy": true,
   "DamageModifiers": [

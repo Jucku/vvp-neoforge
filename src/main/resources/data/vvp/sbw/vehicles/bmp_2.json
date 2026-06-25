@@ -254,7 +254,7 @@
         "Transform": "Barrel",
         "Positions": [
           [
-            0,
+            0.016,
             0,
             2.7
           ]
@@ -285,9 +285,9 @@
         "Transform": "Barrel",
         "Positions": [
           [
-            0,
-            0.35,
-            -0.5
+            -0.1937,
+            -0.0021,
+            0.1851
           ]
         ],
         "Directions": [

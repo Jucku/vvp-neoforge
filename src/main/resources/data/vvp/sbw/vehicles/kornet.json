@@ -20,42 +20,44 @@
     0.25836875,
     0.12611875
   ],
-  "Seats": {
-    "Transform": "Turret",
-    "Position": [
-      0.3,
-      -1.43,
-      -0.6
-    ],
-    "MinPitch": -40,
-    "MaxPitch": 40,
-    "CameraPos": {
-      "Transform": "Turret",
-      "UseFixedCameraPos": true,
-      "Position": [
-        0.2535875,
-        0.5,
-        0.5
-      ],
-      "Direction": "Barrel"
-    },
-    "Weapons": [
-      "Missile"
-    ],
-    "Sensitivity": [
-      0.55,
-      0.75,
-      1
-    ],
-    "DismountInfo": {
+  "Seats": [
+    {
       "Transform": "Turret",
       "Position": [
         0.3,
-        -0.8,
+        -1.43,
         -0.6
-      ]
+      ],
+      "MinPitch": -40,
+      "MaxPitch": 40,
+      "CameraPos": {
+        "Transform": "Turret",
+        "UseFixedCameraPos": true,
+        "Position": [
+          0.2535875,
+          0.5,
+          0.5
+        ],
+        "Direction": "Barrel"
+      },
+      "Weapons": [
+        "Missile"
+      ],
+      "Sensitivity": [
+        0.55,
+        0.75,
+        1
+      ],
+      "DismountInfo": {
+        "Transform": "Turret",
+        "Position": [
+          0.3,
+          -0.8,
+          -0.6
+        ]
+      }
     }
-  },
+  ],
   "UsePassengerCreativeAmmoBox": false,
   "Weapons": {
     "Missile": {
@@ -80,8 +82,8 @@
         "Transform": "Barrel",
         "Positions": [
           [
-            0,
-            0.2,
+            -0.0684,
+            0.471,
             0.3
           ]
         ],

@@ -7,7 +7,7 @@
       "Size": [
         2.28125,
         0.40625,
-        3.0
+        3
       ],
       "Position": [
         -0.03125,
@@ -22,7 +22,7 @@
         4.125
       ],
       "Position": [
-        0.0,
+        0,
         1.15625,
         -0.125
       ]
@@ -73,9 +73,9 @@
         1.78125
       ],
       "Position": [
-        0.0,
-        0.0,
-        0.0
+        0,
+        0,
+        0
       ],
       "Part": "Turret",
       "Transform": "Turret",
@@ -88,11 +88,12 @@
       "CameraPos": {
         "Transform": "Barrel",
         "ZoomPosition": [
-          0.1,
-          0.0517,
-          0
+          0.7806,
+          -0.3785,
+          0.7813
         ],
-        "Direction": "Barrel"
+        "Direction": "Barrel",
+        "ZoomDirection": "Barrel"
       },
       "Weapons": [
         "Cannon",
@@ -101,9 +102,9 @@
       ],
       "Transform": "Turret",
       "Position": [
-        1.06875,
-        -1.25,
-        1.0625
+        0.1332,
+        -0.8604,
+        1.0193
       ],
       "CanRotateHead": false,
       "MinPitch": -15,
@@ -267,8 +268,8 @@
         "Positions": [
           [
             0,
-            0,
-            3.5
+            -0.2575,
+            3.4665
           ]
         ],
         "Directions": [
@@ -341,8 +342,8 @@
         "Positions": [
           [
             1.3,
-            -0.259375,
-            -0.1875
+            0.0198,
+            0.8336
           ]
         ],
         "Directions": [

@@ -134,7 +134,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": 180.0,
+      "Orientation": 180,
       "Transform": "Vehicle",
       "Position": [
         0.70394375,
@@ -148,7 +148,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": 180.0,
+      "Orientation": 180,
       "Transform": "Vehicle",
       "Position": [
         -0.70394375,
@@ -162,7 +162,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": 90.0,
+      "Orientation": 90,
       "Transform": "Vehicle",
       "Position": [
         0.703125,
@@ -176,7 +176,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": 90.0,
+      "Orientation": 90,
       "Transform": "Vehicle",
       "Position": [
         0.703125,
@@ -190,7 +190,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": 90.0,
+      "Orientation": 90,
       "Transform": "Vehicle",
       "Position": [
         0.703125,
@@ -204,7 +204,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": -90.0,
+      "Orientation": -90,
       "Transform": "Vehicle",
       "Position": [
         -0.703125,
@@ -218,7 +218,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": -90.0,
+      "Orientation": -90,
       "Transform": "Vehicle",
       "Position": [
         -0.703125,
@@ -232,7 +232,7 @@
     },
     {
       "IsEnclosed": true,
-      "Orientation": -90.0,
+      "Orientation": -90,
       "Transform": "Vehicle",
       "Position": [
         -0.703125,
@@ -269,8 +269,8 @@
         "Positions": [
           [
             -0.1416,
-            0.25,
-            1.8
+            0.3145,
+            1.7695
           ]
         ],
         "Directions": [

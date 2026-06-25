@@ -219,9 +219,9 @@
       "IsEnclosed": true,
       "Transform": "Vehicle",
       "Position": [
-        0.9902125,
+        0.9902,
         1.3,
-        -4.59856875
+        -4.3408
       ],
       "Orientation": 90,
       "MinPitch": -60,
@@ -289,9 +289,9 @@
       "IsEnclosed": true,
       "Transform": "Vehicle",
       "Position": [
-        -0.9902125,
+        -0.9902,
         1.3,
-        -4.59856875
+        -4.3704
       ],
       "Orientation": -90,
       "MinPitch": -60,
